@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="section-title">Admin Dashboard</h2>
+
+<!-- ================= REGISTER STUDENT ================= -->
+
+<div class="card" style="margin-bottom: 35px;">
+    <h3 style="margin-bottom: 20px;">Register Student</h3>
+
+    <form action="/register-student" method="POST" class="admin-form" id="registerForm">
+        <div class="form-row">
+            <input type="text" name="roll_no" placeholder="Roll No" required>
+            <input type="text" name="name" placeholder="Student Name" required>
+            <input type="text" name="section" placeholder="Section" required>
+
+            <button type="submit" class="btn btn-attendance">
+                Register
+            </button>
+        </div>
+    </form>
+</div>
+
+<!-- ================= STUDENTS TABLE ================= -->
+
+<h3 class="section-title">Students</h3>
+
+<div class="card">
+    <table class="attendance-table">
+        <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Section</th>
+                <th style="text-align:center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in students %}
+            <tr>
+                <td>{{ s.roll_no }}</td>
+                <td>{{ s.name }}</td>
+                <td>{{ s.section }}</td>
+                <td>
+                    <div style="display:flex; gap:10px; justify-content:center;">
+                        
+                        <a href="/register-face/{{ s.roll_no }}">
+                            <button class="btn btn-face" type="button">
+                                Face
+                            </button>
+                        </a>
+
+                        <a href="/delete-student/{{ s.id }}"
+                           onclick="return confirm('Are you sure you want to delete this student? This action cannot be undone.');">
+                            <button class="btn btn-delete" type="button">
+                                Delete
+                            </button>
+                        </a>
+
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<h3 class="section-title">Quick Actions</h3>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap;">
+
+    <a href="/take-attendance">
+        <button class="btn btn-attendance" id="attendanceBtn" type="button">
+            Take Attendance
+        </button>
+    </a>
+
+    <a href="/marks">
+        <button class="btn btn-face" type="button">
+            View Internal Marks
+        </button>
+    </a>
+
+    <a href="/reports">
+        <button class="btn btn-attendance" type="button">
+            View Reports
+        </button>
+    </a>
+
+</div>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    // Register Form Submit Handling
+    const registerForm = document.getElementById("registerForm");
+
+    if (registerForm) {
+        registerForm.addEventListener("submit", function() {
+            const btn = registerForm.querySelector("button[type='submit']");
+            btn.innerText = "Registering...";
+            btn.disabled = true;
+        });
+    }
+
+});
+</script>
+
+{% endblock %}

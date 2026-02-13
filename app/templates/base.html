@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Attendance Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <div class="topbar">
+        <div class="logo">
+            <span class="brand-main">Attend</span>
+            <span class="brand-accent">IQ</span>
+        </div>
+
+        <div class="admin">
+            {% if session.get('admin_logged_in') %}
+                <a href="/logout" class="top-link-btn logout-btn">Logout</a>
+            {% else %}
+                <a href="/login" class="top-link-btn">Admin Login</a>
+            {% endif %}
+        </div>
+    </div>  
+
+    <div class="container">
+        <aside class="sidebar">
+            <ul>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/students-page">Students</a></li>
+                <li><a href="/attendance-page">Attendance</a></li>
+                <li><a href="/marks">Internal Marks</a></li>
+                <li><a href="/reports">Reports</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-container">
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const attendanceBtn = document.getElementById("attendanceBtn");
+
+    if (attendanceBtn) {
+        attendanceBtn.addEventListener("click", function() {
+            attendanceBtn.innerText = "Processing...";
+            attendanceBtn.disabled = true;
+        });
+    }
+});
+</script>
+
+</body>
+
+</html>

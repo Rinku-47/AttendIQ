@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Internal Marks (Attendance Based)</h2>
+<br> 
+{% for student in students %}
+<div class="card" style="margin-bottom: 20px;">
+    <h3>{{ student.roll_no }} - {{ student.name }}</h3>
+    <br>
+
+
+    <table class="attendance-table">
+        <thead>
+            <tr>
+                <th>Period</th>
+                <th>Present Days</th>
+                <th>Marks</th>
+                <th>Max Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in student.periods %}
+            <tr>
+                <td>{{ p.range }}</td>
+                <td>{{ p.present_days }}</td>
+                <td>{{ p.marks }}</td>
+                <td>{{ p.max_marks }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p style="margin-top: 10px;">
+        <b>Total Marks Till Date: {{ student.total_marks }}</b>
+    </p>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="section-title">Dashboard Overview</h2>
+
+<div class="cards">
+    <div class="card">
+        <h3>Total Students</h3>
+        <p>{{ total_students }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Present Today</h3>
+        <p>{{ present_today }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Total Records</h3>
+        <p>{{ total_records }}</p>
+    </div>
+
+    <div class="card">
+        <h3>Average Attendance</h3>
+        <p>{{ avg_attendance }}%</p>
+    </div>
+</div>
+
+<h2 class="section-title">Department / Section Overview</h2>
+
+<table class="attendance-table">
+    <thead>
+        <tr>
+            <th>Section</th>
+            <th>Total Students</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sec in sections %}
+        <tr>
+            <td>{{ sec.section }}</td>
+            <td>{{ sec.count }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

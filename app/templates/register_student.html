@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="section-title">Student Registration</h2>
+
+<div style="display:flex; justify-content:center;">
+    <div class="card" style="width:400px; padding:30px;">
+
+        <form method="POST" action="/register-student">
+
+            <input type="text" name="roll_no" placeholder="Roll Number"
+                   required
+                   style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc;">
+
+            <input type="text" name="name" placeholder="Student Name"
+                   required
+                   style="width:100%; padding:10px; margin-bottom:15px; border-radius:8px; border:1px solid #ccc;">
+
+            <input type="text" name="section" placeholder="Section"
+                   required
+                   style="width:100%; padding:10px; margin-bottom:20px; border-radius:8px; border:1px solid #ccc;">
+
+            <button type="submit" class="btn btn-attendance" style="width:100%;">
+                Register Student
+            </button>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

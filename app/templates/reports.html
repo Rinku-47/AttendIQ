@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="section-title">System Reports</h2>
+
+<div class="cards">
+    <div class="card">
+        <h3>Total Students</h3>
+        <p>{{ total_students }}</p>
+    </div>
+    <div class="card">
+        <h3>Total Working Days</h3>
+        <p>{{ total_days }}</p>
+    </div>
+    <div class="card">
+        <h3>Overall Attendance</h3>
+        <p>{{ overall_attendance }}%</p>
+    </div>
+</div>
+<br>
+<div style="margin-bottom:20px;">
+    <a href="/export-pdf">
+        <button class="btn btn-attendance">Download PDF</button>
+    </a>
+
+    <a href="/export-excel">
+        <button class="btn btn-face">Download Excel</button>
+    </a>
+</div>
+
+
+<h3 class="section-title">Section-wise Report</h3>
+
+<table class="attendance-table">
+    <thead>
+        <tr>
+            <th>Section</th>
+            <th>Total Students</th>
+            <th>Attendance %</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sec in section_reports %}
+        <tr>
+            <td>{{ sec.section }}</td>
+            <td>{{ sec.total_students }}</td>
+            <td>{{ sec.attendance_percent }}%</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3 class="section-title">Student Performance Report</h3>
+
+<table class="attendance-table">
+    <thead>
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Section</th>
+            <th>Present Days</th>
+            <th>Attendance %</th>
+            <th>Internal Marks</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in student_reports %}
+        <tr>
+            <td>{{ s.roll_no }}</td>
+            <td>{{ s.name }}</td>
+            <td>{{ s.section }}</td>
+            <td>{{ s.present_days }}</td>
+            <td>{{ s.attendance_percent }}%</td>
+            <td>{{ s.marks }}</td>
+            <td>{{ s.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
