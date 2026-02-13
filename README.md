@@ -72,7 +72,7 @@ Smart Attendance System/
 
 ### 1️⃣ Clone the repository
 
-git clone https://github.com/YOUR_USERNAME/Smart-Attendance-System.git
+git clone https://github.com/Rinku-47/AttendIQ.git
 
 cd Smart-Attendance-System
 
